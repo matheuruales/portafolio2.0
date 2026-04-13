@@ -1,20 +1,31 @@
 import { useEffect, useState } from "react";
-import { addListener, launch, stop } from "devtools-detector";
 
 export const useDevToolsOpen = () => {
   const [isDevToolsOpen, setIsDevToolsOpen] = useState(false);
 
   useEffect(() => {
     if (typeof window === "undefined") return;
-    addListener((isOpen) => {
-      if (isOpen) {
-        setIsDevToolsOpen(true);
-        stop();
-      }
-    });
-    launch();
+    let isMounted = true;
+    let cleanup: (() => void) | undefined;
+
+    const init = async () => {
+      const { addListener, launch, stop } = await import("devtools-detector");
+      if (!isMounted) return;
+      addListener((isOpen: boolean) => {
+        if (isOpen) {
+          setIsDevToolsOpen(true);
+          stop();
+        }
+      });
+      launch();
+      cleanup = () => stop();
+    };
+
+    init();
+
     return () => {
-      stop();
+      isMounted = false;
+      cleanup?.();
     };
   }, []);
   return { isDevToolsOpen };

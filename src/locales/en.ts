@@ -10,14 +10,14 @@ export const en: Translations = {
     services: "Services",
     testimonials: "Testimonials",
     contact: "Contact",
-    cv: "Resume",
+    cv: "CV",
     hire: "Hire me",
     close: "Close",
   },
   hero: {
     greeting: "Hi, I'm",
     subtitle: "Fullstack AI Engineer",
-    cta_cv: "Resume",
+    cta_cv: "CV",
     cta_hire: "Hire me",
     tooltip_hire: "let's talk 🥹 🙏",
     tooltip_name: "something's waiting for you in devtools",
@@ -104,6 +104,8 @@ export const en: Translations = {
     no_repo: "Repository unavailable for client security",
     gallery: "Project gallery",
     in_dev: "In development",
+    frontend_label: "Frontend",
+    backend_label: "Backend",
   },
   services: {
     title: "SERVICES",
@@ -202,11 +204,11 @@ export const en: Translations = {
   },
   footer: {
     rights: "All rights reserved.",
-    cv_link: "Resume",
+    cv_link: "CV",
     projects_link: "Projects",
   },
   cv: {
-    badge: "Resume",
+    badge: "CV",
     seeking: "Open to new opportunities",
     contact: {
       email_label: "Email",

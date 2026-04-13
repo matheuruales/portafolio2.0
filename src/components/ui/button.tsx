@@ -12,7 +12,7 @@ import {
 } from "react";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
+  "inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background select-none transition-[transform,background-color,color,border-color,box-shadow] duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 active:scale-[0.98] active:translate-y-[1px] disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       variant: {
@@ -67,7 +67,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ variant, size, className }),
-          "cursor-can-hover"
+          "cursor-pointer"
         )}
         ref={ref}
         {...props}

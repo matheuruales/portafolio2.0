@@ -12,11 +12,12 @@ import {
 import { FloatingDock } from "../ui/floating-dock";
 import Link from "next/link";
 
-import projects, { Project } from "@/data/projects";
+import getProjects, { Project } from "@/data/projects";
 import { useLang } from "@/contexts/language";
 
 const ProjectsSection = () => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
+  const projects = getProjects(lang);
   return (
     <section id="projects" className="relative max-w-7xl mx-auto px-4 md:px-8 pb-16 md:pb-24">
       <div className="pointer-events-none absolute inset-0 -z-10">
@@ -38,7 +39,7 @@ const ProjectsSection = () => {
   );
 };
 const Modall = ({ project }: { project: Project }) => {
-  const { t } = useLang();
+  const { t, lang } = useLang();
   return (
     <div className="flex items-center justify-center w-full">
       <Modal>
@@ -62,6 +63,9 @@ const Modall = ({ project }: { project: Project }) => {
                 <div className="text-xs bg-cyan-100 text-cyan-900 rounded-lg w-fit px-2 border border-cyan-200/70">
                   {project.category}
                 </div>
+                <p className="mt-2 text-[11px] md:text-xs text-white/80 leading-relaxed">
+                  {project.problem[lang]}
+                </p>
               </div>
             </div>
           </div>
@@ -110,6 +114,7 @@ const CloseModalButton = () => {
 };
 
 const ProjectContents = ({ project }: { project: Project }) => {
+  const { t } = useLang();
   return (
     <div className="flex flex-col">
       {/* Hero cover */}
@@ -139,7 +144,7 @@ const ProjectContents = ({ project }: { project: Project }) => {
           {project.skills.frontend?.length > 0 && (
             <div className="flex-1 min-w-0">
               <p className="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
-                Frontend
+                {t.projects.frontend_label}
               </p>
               <FloatingDock items={project.skills.frontend} />
             </div>
@@ -147,7 +152,7 @@ const ProjectContents = ({ project }: { project: Project }) => {
           {project.skills.backend?.length > 0 && (
             <div className="flex-1 min-w-0">
               <p className="text-xs uppercase tracking-widest text-neutral-500 dark:text-neutral-400 mb-2">
-                Backend
+                {t.projects.backend_label}
               </p>
               <FloatingDock items={project.skills.backend} />
             </div>

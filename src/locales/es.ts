@@ -8,14 +8,14 @@ export const es = {
     services: "Servicios",
     testimonials: "Testimonios",
     contact: "Contacto",
-    cv: "Hoja de vida",
+    cv: "CV",
     hire: "Contrátame",
     close: "Cerrar",
   },
   hero: {
     greeting: "Hola, soy",
     subtitle: "Ingeniero Fullstack de IA",
-    cta_cv: "Hoja de vida",
+    cta_cv: "CV",
     cta_hire: "Contrátame",
     tooltip_hire: "hablemos 🥹 🙏",
     tooltip_name: "hay algo esperandote en devtools",
@@ -102,6 +102,8 @@ export const es = {
     no_repo: "Repositorio no disponible por seguridad del cliente",
     gallery: "Galería del proyecto",
     in_dev: "En desarrollo",
+    frontend_label: "Frontend",
+    backend_label: "Backend",
   },
   services: {
     title: "SERVICIOS",
@@ -200,11 +202,11 @@ export const es = {
   },
   footer: {
     rights: "Todos los derechos reservados.",
-    cv_link: "Hoja de vida",
+    cv_link: "CV",
     projects_link: "Proyectos",
   },
   cv: {
-    badge: "Hoja de vida",
+    badge: "CV",
     seeking: "En búsqueda de nuevos retos",
     contact: {
       email_label: "Correo",

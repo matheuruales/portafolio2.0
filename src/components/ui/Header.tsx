@@ -5,7 +5,7 @@ import React from "react";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
-  { name: "Hoja de vida", href: "/hoja-de-vida" },
+  { name: "CV", href: "/hoja-de-vida" },
 ];
 
 const Header = () => {

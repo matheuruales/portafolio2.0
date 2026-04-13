@@ -78,6 +78,7 @@ function ElasticCursor() {
   const jellyRef = useRef<HTMLDivElement>(null);
   const [isHovering, setIsHovering] = useState(false);
   const { x, y } = useMouse();
+  const lastMouseRef = useRef({ x: 0, y: 0 });
 
   // Save pos and velocity Objects
   const pos = useInstance(() => ({ x: 0, y: 0 }));
@@ -127,6 +128,36 @@ function ElasticCursor() {
   }, [isMobile]);
 
   const [cursorMoved, setCursorMoved] = useState(false);
+  useEffect(() => {
+    lastMouseRef.current = { x, y };
+  }, [x, y]);
+
+  useEffect(() => {
+    if (isMobile) return;
+    const handleScroll = () => {
+      if (!jellyRef.current) return;
+      if (isHovering) {
+        setIsHovering(false);
+        gsap.to(jellyRef.current, {
+          borderRadius: 50,
+          width: CURSOR_DIAMETER,
+          height: CURSOR_DIAMETER,
+          duration: 0.2,
+          ease: "power2.out",
+        });
+      }
+
+      const { x: lastX, y: lastY } = lastMouseRef.current;
+      pos.x = lastX;
+      pos.y = lastY;
+      if (set.x && set.y) {
+        set.x(lastX);
+        set.y(lastY);
+      }
+    };
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isHovering, isMobile, pos, set]);
   // Run on Mouse Move
   useLayoutEffect(() => {
     if (isMobile) return;
@@ -193,10 +224,17 @@ function ElasticCursor() {
 
   useEffect(() => {
     if (!jellyRef.current) return;
-    jellyRef.current.style.height = "2rem"; // "8rem";
-    jellyRef.current.style.borderRadius = "1rem";
-    jellyRef.current.style.width = loadingPercent * 2 + "vw";
-  }, [loadingPercent]);
+    if (isLoading) {
+      jellyRef.current.style.height = "2rem";
+      jellyRef.current.style.borderRadius = "1rem";
+      jellyRef.current.style.width = loadingPercent * 2 + "vw";
+      return;
+    }
+
+    jellyRef.current.style.width = `${CURSOR_DIAMETER}px`;
+    jellyRef.current.style.height = `${CURSOR_DIAMETER}px`;
+    jellyRef.current.style.borderRadius = "50%";
+  }, [loadingPercent, isLoading]);
 
   useTicker(loop, isLoading || !cursorMoved || isMobile);
   if (isMobile) return null;
@@ -214,12 +252,13 @@ function ElasticCursor() {
         style={{
           zIndex: 100,
           backdropFilter: "invert(100%)",
+          opacity: cursorMoved ? 1 : 0,
         }}
       ></div>
       <div
         ref={dotRef}
         className="w-3 h-3 rounded-full fixed top-0 left-0 pointer-events-none"
-        style={{ backdropFilter: "invert(100%)" }}
+        style={{ backdropFilter: "invert(100%)", opacity: cursorMoved ? 1 : 0 }}
       />
     </>
   );

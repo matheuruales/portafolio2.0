@@ -25,24 +25,68 @@ import {
   SiWhatsapp,
 } from "react-icons/si";
 
+type Lang = "es" | "en";
+type LocalizedString = { es: string; en: string };
+
+const UI_TEXT = {
+  repoFrontend: {
+    es: "Repositorio Frontend",
+    en: "Frontend repository",
+  },
+  repoBackend: {
+    es: "Repositorio Backend",
+    en: "Backend repository",
+  },
+  website: {
+    es: "Sitio Web",
+    en: "Website",
+  },
+  repoPrivateClient: {
+    es: "Repositorio no disponible por seguridad del cliente",
+    en: "Repository unavailable for client security",
+  },
+  reposPrivateClient: {
+    es: "Repositorios no publicos por seguridad del cliente",
+    en: "Repositories not public for client security",
+  },
+  reposPrivatePublic: {
+    es: "Repositorios no abiertos al publico",
+    en: "Repositories not open to the public",
+  },
+  reposPrivateServers: {
+    es: "Repositorios en servidores privados y no abiertos al publico",
+    en: "Repositories on private servers and not open to the public",
+  },
+  inDev: {
+    es: "En desarrollo",
+    en: "In development",
+  },
+  projectGallery: {
+    es: "Galeria del proyecto",
+    en: "Project gallery",
+  },
+};
+
 const ProjectsLinks = ({
   frontendRepo,
   backendRepo,
+  lang,
 }: {
   frontendRepo: string;
   backendRepo: string;
+  lang: Lang;
 }) => {
   return (
     <div className="flex flex-col md:flex-row items-center justify-start gap-3 my-3 mb-8">
       <Link rel="noopener noreferrer" target="_blank" href={frontendRepo}>
         <Button variant="default" size="sm">
-          Repositorio Frontend
+          {UI_TEXT.repoFrontend[lang]}
           <ArrowUpRight className="ml-3 w-5 h-5" />
         </Button>
       </Link>
       <Link rel="noopener noreferrer" target="_blank" href={backendRepo}>
         <Button variant="outline" size="sm">
-          Repositorio Backend
+          {UI_TEXT.repoBackend[lang]}
           <ArrowUpRight className="ml-3 w-5 h-5" />
         </Button>
       </Link>
@@ -197,6 +241,7 @@ export type Project = {
   id: string;
   category: string;
   title: string;
+  problem: LocalizedString;
   src: string;
   screenshots: string[];
   skills: { frontend: Skill[]; backend: Skill[] };
@@ -209,108 +254,163 @@ const anyPostFrontendRepo = "https://github.com/matheuruales/Front_AnyPost.git";
 const anyPostBackendRepo = "https://github.com/matheuruales/back_AnyPost.git";
 const anyPostLiveUrl =
   "https://any-post-frontend-rnnq4zzhh-matheus-projects-d0a163a3.vercel.app/login";
-const anyPostGallery = [
+const anyPostGallery: { src: string; title: LocalizedString; description: LocalizedString }[] = [
   {
     src: "/assets/projects-screenshots/anypost/cover.png",
-    title: "Inicio de sesion",
-    description: "Pantalla de acceso a la plataforma.",
+    title: { es: "Inicio de sesion", en: "Login" },
+    description: {
+      es: "Pantalla de acceso a la plataforma.",
+      en: "Platform access screen.",
+    },
   },
   {
     src: "/assets/projects-screenshots/anypost/anypost-landing-overview.png",
-    title: "Pagina de Inicio",
-    description: "Vista principal de inicio del proyecto.",
+    title: { es: "Pagina de Inicio", en: "Home page" },
+    description: {
+      es: "Vista principal de inicio del proyecto.",
+      en: "Main landing view of the project.",
+    },
   },
   {
     src: "/assets/projects-screenshots/anypost/anypost-dashboard-panel.png",
-    title: "Panel principal",
-    description: "Panel para gestionar contenido y estado de publicacion.",
+    title: { es: "Panel principal", en: "Main dashboard" },
+    description: {
+      es: "Panel para gestionar contenido y estado de publicacion.",
+      en: "Dashboard to manage content and publication status.",
+    },
   },
   {
     src: "/assets/projects-screenshots/anypost/anypost-content-editor.png",
-    title: "Editor de Contenido",
-    description: "Modulo para redactar y editar contenido.",
+    title: { es: "Editor de Contenido", en: "Content editor" },
+    description: {
+      es: "Modulo para redactar y editar contenido.",
+      en: "Module for writing and editing content.",
+    },
   },
   {
     src: "/assets/projects-screenshots/anypost/anypost-publication-workflow.png",
-    title: "Generacion con IA",
-    description: "Pantalla de generacion asistida por inteligencia artificial.",
+    title: { es: "Generacion con IA", en: "AI generation" },
+    description: {
+      es: "Pantalla de generacion asistida por inteligencia artificial.",
+      en: "AI-assisted generation screen.",
+    },
   },
   {
     src: "/assets/projects-screenshots/anypost/anypost-automation-ai-tools.png",
-    title: "Pagina de aterrizaje",
-    description: "Pantalla tipo landing de presentacion del producto.",
+    title: { es: "Pagina de aterrizaje", en: "Landing page" },
+    description: {
+      es: "Pantalla tipo landing de presentacion del producto.",
+      en: "Product presentation landing view.",
+    },
   },
 ];
 const bilbaoVerseLiveUrl = "https://bilbaoverse.net/";
-const bilbaoVerseGallery = [
+const bilbaoVerseGallery: { src: string; title: LocalizedString; description: LocalizedString }[] = [
   {
     src: "/assets/projects-screenshots/bilbaoverse/bilbaoverse-cover.png",
-    title: "BilbaoVerse",
-    description: "Vista principal de la plataforma.",
+    title: { es: "BilbaoVerse", en: "BilbaoVerse" },
+    description: {
+      es: "Vista principal de la plataforma.",
+      en: "Main platform view.",
+    },
   },
 ];
 const crmAIAgentLiveUrl = "https://30x.vercel.app/login";
-const crmAIAgentGallery = [
+const crmAIAgentGallery: { src: string; title: LocalizedString; description: LocalizedString }[] = [
   {
     src: "/assets/projects-screenshots/crm-ai-agent/crm-ai-agent-cover.png",
-    title: "CRM con Agente de IA",
-    description: "Vista principal de la plataforma comercial.",
+    title: { es: "CRM con Agente de IA", en: "CRM with AI agent" },
+    description: {
+      es: "Vista principal de la plataforma comercial.",
+      en: "Main view of the commercial platform.",
+    },
   },
 ];
 const homaLiveUrl = "https://homa-frontend.vercel.app";
-const homaGallery = [
+const homaGallery: { src: string; title: LocalizedString; description: LocalizedString }[] = [
   {
     src: "/assets/projects-screenshots/homa/homa-home.png",
-    title: "Homa Inicio",
-    description: "Vista principal de propiedades en venta y arriendo.",
+    title: { es: "Homa Inicio", en: "Homa Home" },
+    description: {
+      es: "Vista principal de propiedades en venta y arriendo.",
+      en: "Main view of properties for sale and rent.",
+    },
   },
   {
     src: "/assets/projects-screenshots/homa/homa-login.png",
-    title: "Inicio de sesion",
-    description: "Pantalla de acceso a la plataforma.",
+    title: { es: "Inicio de sesion", en: "Login" },
+    description: {
+      es: "Pantalla de acceso a la plataforma.",
+      en: "Platform access screen.",
+    },
   },
 ];
-const ferreteriaEcommerceGallery = [
+const ferreteriaEcommerceGallery: { src: string; title: LocalizedString; description: LocalizedString }[] = [
   {
     src: "/assets/projects-screenshots/ferreteria-ecommerce/ferreteria-storefront.png",
-    title: "Catalogo Comercial",
-    description: "Vista principal para explorar productos de ferreteria.",
+    title: { es: "Catalogo Comercial", en: "Store catalog" },
+    description: {
+      es: "Vista principal para explorar productos de ferreteria.",
+      en: "Main view to explore hardware products.",
+    },
   },
 ];
 const ferreteriaEcommerceLiveUrl = "https://frontend-ferreteria-two.vercel.app/login";
-const pulmoMedGallery = [
+const pulmoMedGallery: { src: string; title: LocalizedString; description: LocalizedString }[] = [
   {
     src: "/assets/projects-screenshots/pulmomed/pulmomed-overview-01.jpeg",
-    title: "Vista General 01",
-    description: "Vista inmersiva general del simulador.",
+    title: { es: "Vista General 01", en: "Overview 01" },
+    description: {
+      es: "Vista inmersiva general del simulador.",
+      en: "General immersive view of the simulator.",
+    },
   },
   {
     src: "/assets/projects-screenshots/pulmomed/pulmomed-overview-02.jpeg",
-    title: "Vista General 02",
-    description: "Interaccion y navegacion del entorno de aprendizaje.",
+    title: { es: "Vista General 02", en: "Overview 02" },
+    description: {
+      es: "Interaccion y navegacion del entorno de aprendizaje.",
+      en: "Interaction and navigation of the learning environment.",
+    },
   },
   {
     src: "/assets/projects-screenshots/pulmomed/pulmomed-overview-03.jpeg",
-    title: "Vista General 03",
-    description: "Escenarios educativos enfocados en cancer de pulmon.",
+    title: { es: "Vista General 03", en: "Overview 03" },
+    description: {
+      es: "Escenarios educativos enfocados en cancer de pulmon.",
+      en: "Educational scenarios focused on lung cancer.",
+    },
   },
   {
     src: "/assets/projects-screenshots/pulmomed/pulmomed-overview-04.jpeg",
-    title: "Vista General 04",
-    description: "Modulo de experiencia virtual en contexto medico.",
+    title: { es: "Vista General 04", en: "Overview 04" },
+    description: {
+      es: "Modulo de experiencia virtual en contexto medico.",
+      en: "Virtual experience module in a medical context.",
+    },
   },
   {
     src: "/assets/projects-screenshots/pulmomed/pulmomed-overview-05.jpeg",
-    title: "Vista General 05",
-    description: "Recorrido de simulacion con enfoque en salud.",
+    title: { es: "Vista General 05", en: "Overview 05" },
+    description: {
+      es: "Recorrido de simulacion con enfoque en salud.",
+      en: "Simulation walkthrough with a health focus.",
+    },
   },
 ];
 
-const projects: Project[] = [
+const getProjects = (lang: Lang): Project[] => [
   {
     id: "anypost",
-    category: "Plataforma Fullstack con IA",
-    title: "Any Post",
+    category:
+      lang === "es"
+        ? "Plataforma Fullstack con IA"
+        : "Full-stack AI platform",
+    title: lang === "es" ? "Any Post" : "Any Post",
+    problem: {
+      es: "Creadores con herramientas dispersas y procesos manuales para publicar en varias redes.",
+      en: "Creators juggling fragmented tools and manual workflows to publish across multiple networks.",
+    },
     src: "/assets/projects-screenshots/anypost/cover.png",
     screenshots: anyPostGallery.map((item) => item.src),
     live: anyPostLiveUrl,
@@ -334,19 +434,18 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono">
-            Any Post es una plataforma web orientada a la creacion y gestion de
-            contenido digital, pensada para centralizar el flujo de trabajo de
-            los creadores en una experiencia moderna, intuitiva y escalable. Su
-            enfoque combina usabilidad, automatizacion e inteligencia artificial
-            para optimizar la produccion y publicacion de contenido.
+            {lang === "es"
+              ? "Any Post es una plataforma web orientada a la creacion y gestion de contenido digital, pensada para centralizar el flujo de trabajo de los creadores en una experiencia moderna, intuitiva y escalable. Su enfoque combina usabilidad, automatizacion e inteligencia artificial para optimizar la produccion y publicacion de contenido."
+              : "Any Post is a web platform focused on creating and managing digital content, designed to centralize creators' workflows in a modern, intuitive, and scalable experience. Its approach combines usability, automation, and AI to optimize content production and publishing."}
           </TypographyP>
           <ProjectsLinks
             frontendRepo={anyPostFrontendRepo}
             backendRepo={anyPostBackendRepo}
+            lang={lang}
           />
           <div className="mt-6">
             <h5 className="text-lg md:text-xl font-semibold mb-4">
-              Galeria del proyecto
+              {UI_TEXT.projectGallery[lang]}
             </h5>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               {anyPostGallery.map((item) => (
@@ -357,17 +456,17 @@ const projects: Project[] = [
                   <div className="relative aspect-[16/10]">
                     <Image
                       src={item.src}
-                      alt={item.title}
+                      alt={item.title[lang]}
                       fill
                       className="object-cover"
                     />
                   </div>
                   <figcaption className="p-3">
                     <p className="text-sm md:text-base font-semibold">
-                      {item.title}
+                      {item.title[lang]}
                     </p>
                     <p className="text-xs md:text-sm text-white/75">
-                      {item.description}
+                      {item.description[lang]}
                     </p>
                   </figcaption>
                 </figure>
@@ -380,8 +479,15 @@ const projects: Project[] = [
   },
   {
     id: "bilbaoverse",
-    category: "Plataforma de Ecosistema Empresarial",
-    title: "BilbaoVerse",
+    category:
+      lang === "es"
+        ? "Plataforma de Ecosistema Empresarial"
+        : "Business ecosystem platform",
+    title: lang === "es" ? "BilbaoVerse" : "BilbaoVerse",
+    problem: {
+      es: "Empresas y comunidad sin un punto unico para conectar, colaborar y crecer.",
+      en: "Businesses and community lacked a single hub to connect, collaborate, and grow.",
+    },
     src: "/assets/projects-screenshots/bilbaoverse/bilbaoverse-cover.png",
     screenshots: bilbaoVerseGallery.map((item) => item.src),
     live: bilbaoVerseLiveUrl,
@@ -398,20 +504,19 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono">
-            BilbaoVerse es una plataforma digital orientada a conectar
-            negocios, comunidad y oportunidades de crecimiento en Latinoamerica,
-            funcionando como un ecosistema para impulsar relaciones
-            estrategicas, colaboracion y expansion empresarial.
+            {lang === "es"
+              ? "BilbaoVerse es una plataforma digital orientada a conectar negocios, comunidad y oportunidades de crecimiento en Latinoamerica, funcionando como un ecosistema para impulsar relaciones estrategicas, colaboracion y expansion empresarial."
+              : "BilbaoVerse is a digital platform designed to connect businesses, community, and growth opportunities in Latin America, operating as an ecosystem to foster strategic relationships, collaboration, and business expansion."}
           </TypographyP>
           <div className="flex flex-wrap items-center gap-3 my-4 mb-8">
             <Link href={bilbaoVerseLiveUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="default" size="sm">
-                Sitio Web
+                {UI_TEXT.website[lang]}
                 <ArrowUpRight className="ml-3 w-5 h-5" />
               </Button>
             </Link>
             <span className="text-xs md:text-sm text-white/70 border border-white/20 rounded-md px-3 py-2">
-              Repositorio no disponible por seguridad del cliente
+              {UI_TEXT.repoPrivateClient[lang]}
             </span>
           </div>
           <div className="mt-4 grid grid-cols-1 gap-4">
@@ -421,11 +526,20 @@ const projects: Project[] = [
                 className="rounded-xl overflow-hidden border border-white/15 bg-black/30 backdrop-blur-sm"
               >
                 <div className="relative aspect-[16/10]">
-                  <Image src={item.src} alt={item.title} fill className="object-cover" />
+                  <Image
+                    src={item.src}
+                    alt={item.title[lang]}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <figcaption className="p-3">
-                  <p className="text-sm md:text-base font-semibold">{item.title}</p>
-                  <p className="text-xs md:text-sm text-white/75">{item.description}</p>
+                  <p className="text-sm md:text-base font-semibold">
+                    {item.title[lang]}
+                  </p>
+                  <p className="text-xs md:text-sm text-white/75">
+                    {item.description[lang]}
+                  </p>
                 </figcaption>
               </figure>
             ))}
@@ -436,8 +550,15 @@ const projects: Project[] = [
   },
   {
     id: "crm-agente-ia",
-    category: "Plataforma Comercial con IA",
-    title: "CRM con agente de IA",
+    category:
+      lang === "es"
+        ? "Plataforma Comercial con IA"
+        : "AI-enabled commercial platform",
+    title: lang === "es" ? "CRM con agente de IA" : "CRM with AI agent",
+    problem: {
+      es: "Equipos comerciales sin automatizacion inteligente para gestionar leads y seguimiento.",
+      en: "Sales teams lacked smart automation for lead management and follow-up.",
+    },
     src: "/assets/projects-screenshots/crm-ai-agent/crm-ai-agent-cover.png",
     screenshots: crmAIAgentGallery.map((item) => item.src),
     live: crmAIAgentLiveUrl,
@@ -456,19 +577,19 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono">
-            Plataforma comercial que integra un CRM con inteligencia artificial
-            para gestionar leads, automatizar seguimiento y optimizar procesos
-            de venta.
+            {lang === "es"
+              ? "Plataforma comercial que integra un CRM con inteligencia artificial para gestionar leads, automatizar seguimiento y optimizar procesos de venta."
+              : "Commercial platform that integrates a CRM with AI to manage leads, automate follow-up, and optimize sales processes."}
           </TypographyP>
           <div className="flex flex-wrap items-center gap-3 my-4 mb-8">
             <Link href={crmAIAgentLiveUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="default" size="sm">
-                Sitio Web
+                {UI_TEXT.website[lang]}
                 <ArrowUpRight className="ml-3 w-5 h-5" />
               </Button>
             </Link>
             <span className="text-xs md:text-sm text-white/70 border border-white/20 rounded-md px-3 py-2">
-              Repositorios no publicos por seguridad del cliente
+              {UI_TEXT.reposPrivateClient[lang]}
             </span>
           </div>
           <div className="mt-4 grid grid-cols-1 gap-4">
@@ -478,11 +599,20 @@ const projects: Project[] = [
                 className="rounded-xl overflow-hidden border border-white/15 bg-black/30 backdrop-blur-sm"
               >
                 <div className="relative aspect-[16/10]">
-                  <Image src={item.src} alt={item.title} fill className="object-cover" />
+                  <Image
+                    src={item.src}
+                    alt={item.title[lang]}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <figcaption className="p-3">
-                  <p className="text-sm md:text-base font-semibold">{item.title}</p>
-                  <p className="text-xs md:text-sm text-white/75">{item.description}</p>
+                  <p className="text-sm md:text-base font-semibold">
+                    {item.title[lang]}
+                  </p>
+                  <p className="text-xs md:text-sm text-white/75">
+                    {item.description[lang]}
+                  </p>
                 </figcaption>
               </figure>
             ))}
@@ -493,8 +623,15 @@ const projects: Project[] = [
   },
   {
     id: "homa",
-    category: "Plataforma Inmobiliaria · En desarrollo",
-    title: "Homa",
+    category:
+      lang === "es"
+        ? "Plataforma Inmobiliaria · En desarrollo"
+        : "Real estate platform · In development",
+    title: lang === "es" ? "Homa" : "Homa",
+    problem: {
+      es: "Busqueda y gestion de inmuebles sin una experiencia digital clara y centralizada.",
+      en: "Property search and management lacked a clear, centralized digital experience.",
+    },
     src: "/assets/projects-screenshots/homa/homa-home.png",
     screenshots: homaGallery.map((item) => item.src),
     live: homaLiveUrl,
@@ -510,21 +647,22 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono">
-            Plataforma web inmobiliaria disenada para la publicacion, busqueda y
-            gestion de propiedades en venta y arriendo.
+            {lang === "es"
+              ? "Plataforma web inmobiliaria disenada para la publicacion, busqueda y gestion de propiedades en venta y arriendo."
+              : "Real estate web platform designed for publishing, searching, and managing properties for sale and rent."}
           </TypographyP>
           <div className="flex flex-wrap items-center gap-3 my-4 mb-8">
             <Link href={homaLiveUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="default" size="sm">
-                Sitio Web
+                {UI_TEXT.website[lang]}
                 <ArrowUpRight className="ml-3 w-5 h-5" />
               </Button>
             </Link>
             <span className="text-xs md:text-sm text-amber-300 border border-amber-400/40 rounded-md px-3 py-2">
-              En desarrollo
+              {UI_TEXT.inDev[lang]}
             </span>
             <span className="text-xs md:text-sm text-white/70 border border-white/20 rounded-md px-3 py-2">
-              Repositorios no abiertos al publico
+              {UI_TEXT.reposPrivatePublic[lang]}
             </span>
           </div>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -534,11 +672,20 @@ const projects: Project[] = [
                 className="rounded-xl overflow-hidden border border-white/15 bg-black/30 backdrop-blur-sm"
               >
                 <div className="relative aspect-[16/10]">
-                  <Image src={item.src} alt={item.title} fill className="object-cover" />
+                  <Image
+                    src={item.src}
+                    alt={item.title[lang]}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <figcaption className="p-3">
-                  <p className="text-sm md:text-base font-semibold">{item.title}</p>
-                  <p className="text-xs md:text-sm text-white/75">{item.description}</p>
+                  <p className="text-sm md:text-base font-semibold">
+                    {item.title[lang]}
+                  </p>
+                  <p className="text-xs md:text-sm text-white/75">
+                    {item.description[lang]}
+                  </p>
                 </figcaption>
               </figure>
             ))}
@@ -549,8 +696,15 @@ const projects: Project[] = [
   },
   {
     id: "ferreteria-ecommerce",
-    category: "Comercio electronico · En desarrollo",
-    title: "E-commerce de ferreteria",
+    category:
+      lang === "es"
+        ? "Comercio electronico · En desarrollo"
+        : "E-commerce · In development",
+    title: lang === "es" ? "E-commerce de ferreteria" : "Hardware store e-commerce",
+    problem: {
+      es: "Catalogos de ferreteria sin vitrina digital moderna ni proceso de compra agil.",
+      en: "Hardware catalogs lacked a modern digital storefront and streamlined purchase flow.",
+    },
     src: "/assets/projects-screenshots/ferreteria-ecommerce/ferreteria-storefront.png",
     screenshots: ferreteriaEcommerceGallery.map((item) => item.src),
     live: ferreteriaEcommerceLiveUrl,
@@ -567,22 +721,22 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono">
-            Tienda online disenada para la visualizacion, organizacion y
-            exploracion de productos de ferreteria dentro de una experiencia
-            moderna y comercial.
+            {lang === "es"
+              ? "Tienda online disenada para la visualizacion, organizacion y exploracion de productos de ferreteria dentro de una experiencia moderna y comercial."
+              : "Online store designed for browsing and organizing hardware products within a modern commercial experience."}
           </TypographyP>
           <div className="flex flex-wrap items-center gap-3 my-4 mb-8">
             <Link href={ferreteriaEcommerceLiveUrl} target="_blank" rel="noopener noreferrer">
               <Button variant="default" size="sm">
-                Sitio Web
+                {UI_TEXT.website[lang]}
                 <ArrowUpRight className="ml-3 w-5 h-5" />
               </Button>
             </Link>
             <span className="text-xs md:text-sm text-amber-300 border border-amber-400/40 rounded-md px-3 py-2">
-              En desarrollo
+              {UI_TEXT.inDev[lang]}
             </span>
             <span className="text-xs md:text-sm text-white/70 border border-white/20 rounded-md px-3 py-2">
-              Repositorios no abiertos al publico
+              {UI_TEXT.reposPrivatePublic[lang]}
             </span>
           </div>
           <div className="mt-4 grid grid-cols-1 gap-4">
@@ -592,11 +746,20 @@ const projects: Project[] = [
                 className="rounded-xl overflow-hidden border border-white/15 bg-black/30 backdrop-blur-sm"
               >
                 <div className="relative aspect-[16/10]">
-                  <Image src={item.src} alt={item.title} fill className="object-cover" />
+                  <Image
+                    src={item.src}
+                    alt={item.title[lang]}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <figcaption className="p-3">
-                  <p className="text-sm md:text-base font-semibold">{item.title}</p>
-                  <p className="text-xs md:text-sm text-white/75">{item.description}</p>
+                  <p className="text-sm md:text-base font-semibold">
+                    {item.title[lang]}
+                  </p>
+                  <p className="text-xs md:text-sm text-white/75">
+                    {item.description[lang]}
+                  </p>
                 </figcaption>
               </figure>
             ))}
@@ -607,8 +770,15 @@ const projects: Project[] = [
   },
   {
     id: "pulmomed",
-    category: "Educacion en Salud con RV · En desarrollo",
-    title: "PulmoMed",
+    category:
+      lang === "es"
+        ? "Educacion en Salud con RV · En desarrollo"
+        : "Health Education in VR · In development",
+    title: lang === "es" ? "PulmoMed" : "PulmoMed",
+    problem: {
+      es: "Aprendizaje de oncologia pulmonar sin experiencias practicas e inmersivas.",
+      en: "Pulmonary oncology training lacked hands-on, immersive learning experiences.",
+    },
     src: "/assets/projects-screenshots/pulmomed/pulmomed-overview-01.jpeg",
     screenshots: pulmoMedGallery.map((item) => item.src),
     skills: {
@@ -623,18 +793,16 @@ const projects: Project[] = [
       return (
         <div>
           <TypographyP className="font-mono">
-            PulmoMed es un simulador de realidad virtual disenado para
-            fortalecer el aprendizaje del cancer de pulmon mediante
-            experiencias inmersivas e interactivas. El proyecto integra
-            inteligencia artificial y un enfoque educativo en salud para apoyar
-            la formacion de estudiantes y profesionales del area medica.
+            {lang === "es"
+              ? "PulmoMed es un simulador de realidad virtual disenado para fortalecer el aprendizaje del cancer de pulmon mediante experiencias inmersivas e interactivas. El proyecto integra inteligencia artificial y un enfoque educativo en salud para apoyar la formacion de estudiantes y profesionales del area medica."
+              : "PulmoMed is a virtual reality simulator designed to strengthen learning about lung cancer through immersive, interactive experiences. The project integrates AI and a health education approach to support training for medical students and professionals."}
           </TypographyP>
           <div className="flex flex-wrap items-center gap-3 my-4 mb-8">
             <span className="text-xs md:text-sm text-amber-300 border border-amber-400/40 rounded-md px-3 py-2">
-              En desarrollo
+              {UI_TEXT.inDev[lang]}
             </span>
             <span className="text-xs md:text-sm text-white/70 border border-white/20 rounded-md px-3 py-2">
-              Repositorios en servidores privados y no abiertos al publico
+              {UI_TEXT.reposPrivateServers[lang]}
             </span>
           </div>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -644,11 +812,20 @@ const projects: Project[] = [
                 className="rounded-xl overflow-hidden border border-white/15 bg-black/30 backdrop-blur-sm"
               >
                 <div className="relative aspect-[16/10]">
-                  <Image src={item.src} alt={item.title} fill className="object-cover" />
+                  <Image
+                    src={item.src}
+                    alt={item.title[lang]}
+                    fill
+                    className="object-cover"
+                  />
                 </div>
                 <figcaption className="p-3">
-                  <p className="text-sm md:text-base font-semibold">{item.title}</p>
-                  <p className="text-xs md:text-sm text-white/75">{item.description}</p>
+                  <p className="text-sm md:text-base font-semibold">
+                    {item.title[lang]}
+                  </p>
+                  <p className="text-xs md:text-sm text-white/75">
+                    {item.description[lang]}
+                  </p>
                 </figcaption>
               </figure>
             ))}
@@ -659,4 +836,4 @@ const projects: Project[] = [
   },
 ];
 
-export default projects;
+export default getProjects;

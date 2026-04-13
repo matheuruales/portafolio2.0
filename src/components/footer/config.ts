@@ -1,6 +1,6 @@
 const footer: { title: string; href: string }[] = [
   {
-    title: "Hoja de vida",
+    title: "CV",
     href: "/hoja-de-vida",
   },
   {
