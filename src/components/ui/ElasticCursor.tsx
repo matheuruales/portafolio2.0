@@ -37,6 +37,9 @@ const EMPTY = {} as {
   sx?: Function;
   sy?: Function;
 };
+
+type Position = { x: number; y: number };
+type Velocity = { x: number; y: number };
 function useInstance(value = {}) {
   const ref = useRef(EMPTY);
   if (ref.current === EMPTY) {
@@ -81,8 +84,8 @@ function ElasticCursor() {
   const lastMouseRef = useRef({ x: 0, y: 0 });
 
   // Save pos and velocity Objects
-  const pos = useInstance(() => ({ x: 0, y: 0 }));
-  const vel = useInstance(() => ({ x: 0, y: 0 }));
+  const pos = useInstance(() => ({ x: 0, y: 0 })) as Position;
+  const vel = useInstance(() => ({ x: 0, y: 0 })) as Velocity;
   const set = useInstance();
 
   // Set GSAP quick setter Values on useLayoutEffect Update
