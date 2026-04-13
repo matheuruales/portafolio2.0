@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Archivo_Black } from "next/font/google";
 import "./globals.css";
-import ElasticCursor from "@/components/ui/ElasticCursor";
-import Particles from "@/components/Particles";
 import { ThemeProvider } from "@/components/theme-provider";
 import Header from "@/components/header/header";
 import { Toaster } from "@/components/ui/toaster";
@@ -10,10 +8,9 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Footer from "@/components/footer/footer";
 import Script from "next/script";
 import Preloader from "@/components/preloader";
-import EasterEggs from "@/components/easter-eggs";
 import { config } from "@/data/config";
 import SocketContextProvider from "@/contexts/socketio";
-import RemoteCursors from "@/components/realtime/remote-cursors";
+import ClientVisuals from "@/components/client-visuals";
 import { LanguageProvider } from "@/contexts/language";
 
 const SITE_URL =
@@ -91,13 +88,9 @@ export default function RootLayout({
           defaultTheme="dark"
           disableTransitionOnChange
         >
-          <Particles
-            className="fixed inset-0 -z-10 animate-fade-in"
-            quantity={60}
-          />
           <Preloader>
             <SocketContextProvider>
-              <RemoteCursors />
+              <ClientVisuals />
               <TooltipProvider>
                 <Header />
                 {children}
@@ -105,8 +98,6 @@ export default function RootLayout({
               </TooltipProvider>
             </SocketContextProvider>
             <Toaster />
-            <EasterEggs />
-            <ElasticCursor />
           </Preloader>
         </ThemeProvider>
         </LanguageProvider>

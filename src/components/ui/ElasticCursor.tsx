@@ -28,7 +28,11 @@ function useTicker(callback: any, paused: boolean) {
   }, [callback, paused]);
 }
 
-const EMPTY = {} as {
+const EMPTY = {} as Record<string, never>;
+
+type Position = { x: number; y: number };
+type Velocity = { x: number; y: number };
+type Setters = {
   x: Function;
   y: Function;
   r?: Function;
@@ -37,13 +41,10 @@ const EMPTY = {} as {
   sx?: Function;
   sy?: Function;
 };
-
-type Position = { x: number; y: number };
-type Velocity = { x: number; y: number };
-function useInstance(value = {}) {
-  const ref = useRef(EMPTY);
-  if (ref.current === EMPTY) {
-    ref.current = typeof value === "function" ? value() : value;
+function useInstance<T>(value: T | (() => T)) {
+  const ref = useRef<T | null>(null);
+  if (ref.current === null) {
+    ref.current = typeof value === "function" ? (value as () => T)() : value;
   }
   return ref.current;
 }
@@ -84,9 +85,9 @@ function ElasticCursor() {
   const lastMouseRef = useRef({ x: 0, y: 0 });
 
   // Save pos and velocity Objects
-  const pos = useInstance(() => ({ x: 0, y: 0 })) as Position;
-  const vel = useInstance(() => ({ x: 0, y: 0 })) as Velocity;
-  const set = useInstance();
+  const pos = useInstance<Position>(() => ({ x: 0, y: 0 }));
+  const vel = useInstance<Velocity>(() => ({ x: 0, y: 0 }));
+  const set = useInstance<Setters>({} as Setters);
 
   // Set GSAP quick setter Values on useLayoutEffect Update
   useLayoutEffect(() => {

@@ -99,7 +99,7 @@ const AboutSection = () => {
               </div>
             </div>
 
-            <div className="lg:col-span-5 flex justify-center">
+            <div className="lg:col-span-5 flex justify-center mt-6 lg:mt-0">
               <div className="about-lanyard-anchor">
                 <div className="about-lanyard-string" />
                 <div className="about-lanyard-pin" />

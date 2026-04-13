@@ -44,7 +44,7 @@ const HeroSection = () => {
                   <p
                     className={cn(
                       "md:self-start mt-2 text-xs sm:text-sm uppercase tracking-[0.22em]",
-                      "cursor-default text-cyan-800/85 dark:text-cyan-300/80"
+                      "cursor-default text-center md:text-left text-cyan-800/85 dark:text-cyan-300/80"
                     )}
                   >
                     {t.hero.greeting}
@@ -55,7 +55,7 @@ const HeroSection = () => {
                     <TooltipTrigger asChild>
                       <h1
                         className={cn(
-                          "cursor-default text-left leading-[0.9] tracking-tight"
+                          "cursor-default text-center md:text-left leading-[0.9] tracking-tight"
                         )}
                       >
                         <span className="block text-[clamp(1.95rem,4.8vw,3.75rem)] font-semibold bg-gradient-to-r from-zinc-900 via-slate-700 to-cyan-700 bg-clip-text text-transparent dark:from-zinc-100 dark:via-zinc-200 dark:to-cyan-200 drop-shadow-[0_8px_20px_rgba(15,23,42,0.18)]">
@@ -83,7 +83,7 @@ const HeroSection = () => {
                   <p
                     className={cn(
                       "md:self-start md:mt-3 font-normal text-sm sm:text-base md:text-lg text-slate-700 dark:text-zinc-400",
-                      "cursor-default"
+                      "cursor-default text-center md:text-left"
                   )}
                   >
                     {t.hero.subtitle}
@@ -134,6 +134,18 @@ const HeroSection = () => {
                       <SiLinkedin size={24} className="text-black dark:text-white" />
                     </Button>
                   </Link>
+                </div>
+              </div>
+              <div className="mt-10 flex w-full justify-center md:hidden">
+                <div className="relative w-56 sm:w-64 rounded-3xl overflow-hidden border border-cyan-300/30 dark:border-white/10 shadow-[0_20px_50px_rgba(14,116,144,0.2)] dark:shadow-[0_20px_50px_rgba(0,0,0,0.45)]">
+                  <Image
+                    src="/assets/profile/matheu-hero.jpg"
+                    alt="Johnatan Matheu Ruales Galvis"
+                    width={320}
+                    height={420}
+                    className="object-cover w-full"
+                    priority
+                  />
                 </div>
               </div>
             </>

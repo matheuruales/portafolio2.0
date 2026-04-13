@@ -74,7 +74,84 @@ const ExperienceSection = () => {
           {t.experience.subtitle}
         </p>
 
-        <div className="relative mt-12 md:mt-14">
+        {/* Mobile-only layout */}
+        <div className="mt-10 space-y-5 md:hidden">
+          {t.experience.timeline.map((item, index) => {
+            const style = ITEM_STYLE[item.kind as ExperienceKind];
+            const kindLabel = item.kind === "work" ? t.experience.kind.work : t.experience.kind.academic;
+            return (
+              <motion.article
+                key={`mobile-${item.title}-${index}`}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.45, delay: index * 0.04 }}
+                className="group"
+              >
+                <div className={cn("rounded-[1.15rem] bg-gradient-to-br p-[1px]", style.cardGradient)}>
+                  <div
+                    className={cn(
+                      "relative overflow-hidden rounded-[1.05rem] border border-cyan-200/45 dark:border-white/15 bg-white/92 dark:bg-zinc-950/76 backdrop-blur-xl p-5 shadow-[0_18px_40px_-26px_rgba(15,23,42,0.35)] dark:shadow-[0_24px_55px_-30px_rgba(0,0,0,0.85)] transition-all duration-300",
+                      style.border
+                    )}
+                  >
+                    <div
+                      className={cn(
+                        "pointer-events-none absolute inset-0 bg-gradient-to-br opacity-80 transition-opacity duration-300 group-hover:opacity-100",
+                        style.glow
+                      )}
+                    />
+                    <div className="relative z-10 flex flex-col items-center text-center">
+                      <div
+                        className={cn(
+                          "inline-flex h-10 w-10 items-center justify-center rounded-2xl border mb-3",
+                          style.iconWrap
+                        )}
+                      >
+                        {item.kind === "work" ? (
+                          <BriefcaseBusiness className="h-5 w-5" />
+                        ) : (
+                          <GraduationCap className="h-5 w-5" />
+                        )}
+                      </div>
+                      <div className="flex flex-wrap items-center justify-center gap-2">
+                        <span
+                          className={cn(
+                            "inline-flex items-center gap-1 rounded-full border px-3 py-1 text-[11px]",
+                            style.badge
+                          )}
+                        >
+                          {item.kind === "work" ? (
+                            <BriefcaseBusiness className="h-3.5 w-3.5" />
+                          ) : (
+                            <GraduationCap className="h-3.5 w-3.5" />
+                          )}
+                          {kindLabel}
+                        </span>
+                        <span className="inline-flex items-center gap-1 rounded-full border border-black/10 dark:border-white/20 bg-white/70 dark:bg-black/35 px-3 py-1 text-[11px] text-zinc-700 dark:text-zinc-300">
+                          <CalendarClock className="h-3.5 w-3.5" />
+                          {item.period}
+                        </span>
+                      </div>
+                      <h3 className="mt-4 text-base font-semibold leading-snug text-zinc-900 dark:text-zinc-100 text-balance">
+                        {item.title}
+                      </h3>
+                      <p className="mt-1 text-sm font-medium text-zinc-700 dark:text-zinc-300">
+                        {item.org}
+                      </p>
+                      <p className="mt-3 text-sm leading-7 text-zinc-800 dark:text-zinc-200">
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
+
+        {/* Desktop timeline */}
+        <div className="relative mt-12 md:mt-14 hidden md:block">
           <div className="pointer-events-none absolute left-[10px] sm:left-5 md:left-1/2 md:-translate-x-1/2 top-0 h-full w-[2px] bg-gradient-to-b from-cyan-300/85 via-cyan-400/45 via-emerald-300/35 to-transparent" />
 
           <div className="space-y-5 sm:space-y-6 md:space-y-8">

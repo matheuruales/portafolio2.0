@@ -57,11 +57,11 @@ const Header = ({ loader }: HeaderProps) => {
         }}
       >
       </div> */}
-      <div className={cn(styles.bar, "flex items-center justify-between")}>
+      <div className={cn(styles.bar, "flex items-center justify-between gap-2 md:gap-3")}>
         <Link href="/" className="flex items-center justify-center">
           <Button
             variant={"link"}
-            className={cn("text-md normal-case no-underline", styles.brandBtn)}
+            className={cn("text-md normal-case no-underline max-w-[55vw] truncate", styles.brandBtn)}
           >
             {config.author}
           </Button>
@@ -82,7 +82,9 @@ const Header = ({ loader }: HeaderProps) => {
           ))}
         </nav>
 
-        <OnlineUsers />
+        <div className="hidden md:block">
+          <OnlineUsers />
+        </div>
         <button
           onClick={toggle}
           className="text-xs font-semibold px-2.5 py-1 rounded-full border border-black/15 dark:border-white/20 hover:bg-black/5 dark:hover:bg-white/10 transition-colors mr-2"
