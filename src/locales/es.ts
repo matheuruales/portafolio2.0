@@ -14,7 +14,7 @@ export const es = {
   },
   hero: {
     greeting: "Hola, soy",
-    subtitle: "Ingeniero Fullstack de IA",
+    subtitle: "Fullstack AI Engineer & Product Owner",
     cta_cv: "CV",
     cta_hire: "Contrátame",
     tooltip_hire: "hablemos 🥹 🙏",
@@ -22,7 +22,7 @@ export const es = {
   },
   about: {
     title: "ACERCA DE MI.",
-    p1: "Soy estudiante de quinto semestre de Ingeniería de Software y actualmente me desempeño como Ingeniero Fullstack de IA, enfocado en crear aplicaciones web modernas, productos digitales escalables y agentes de inteligencia artificial que resuelvan problemas reales.",
+    p1: "Soy estudiante de quinto semestre de Ingeniería de Software y actualmente me desempeño como Fullstack AI Engineer, enfocado en crear aplicaciones web modernas, productos digitales escalables y agentes de inteligencia artificial que resuelvan problemas reales.",
     p2: "Me interesa participar en todo el proceso de desarrollo, desde la idea y la definición de la solución hasta la construcción de productos funcionales, bien pensados y orientados al impacto.",
     p3: "Me caracterizo por una mentalidad de aprendizaje constante, disciplina y mejora continua para construir tecnología con valor real.",
     stats: [
@@ -31,7 +31,7 @@ export const es = {
       { value: "24+", label: "Tecnologías Clave" },
     ],
     pills: [
-      "Ingeniero Fullstack de IA",
+      "Fullstack AI Engineer",
       "Web Apps Modernas",
       "Agentes de IA",
       "Productos Escalables",

@@ -16,7 +16,7 @@ export const en: Translations = {
   },
   hero: {
     greeting: "Hi, I'm",
-    subtitle: "Fullstack AI Engineer",
+    subtitle: "Fullstack AI Engineer & Product Owner",
     cta_cv: "CV",
     cta_hire: "Hire me",
     tooltip_hire: "let's talk 🥹 🙏",

@@ -24,26 +24,30 @@ const ContactForm = () => {
     e.preventDefault();
     setLoading(true);
     try {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), 30000);
+
       const res = await fetch("/api/send", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          fullName,
-          email,
-          message,
-        }),
+        body: JSON.stringify({ fullName, email, message }),
+        signal: controller.signal,
       });
-      const data = await res.json();
-      if (data.error) throw new Error(data.error);
+      window.clearTimeout(timeoutId);
+
+      const contentType = res.headers.get("content-type") || "";
+      const data = contentType.includes("application/json")
+        ? await res.json()
+        : { error: "Respuesta inesperada del servidor" };
+      if (!res.ok) throw new Error(data.detail || data.error || "Error al enviar el mensaje");
       toast({
         title: t.form.success_title,
         description: t.form.success_desc,
         variant: "default",
         className: cn("top-0 mx-auto flex fixed md:top-4 md:right-4"),
       });
-      setLoading(false);
       setFullName("");
       setEmail("");
       setMessage("");
@@ -52,16 +56,20 @@ const ContactForm = () => {
         clearTimeout(timer);
       }, 1000);
     } catch (err) {
+      const isAbort = err instanceof DOMException && err.name === "AbortError";
       toast({
         title: t.form.error_title,
-        description: t.form.error_desc,
+        description: isAbort
+          ? "El servidor tardo demasiado en responder. Intenta de nuevo."
+          : t.form.error_desc,
         className: cn(
           "top-0 w-full flex justify-center fixed md:max-w-7xl md:top-4 md:right-4"
         ),
         variant: "destructive",
       });
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
   return (
     <form className="w-full mx-auto sm:mt-4" onSubmit={handleSubmit}>
